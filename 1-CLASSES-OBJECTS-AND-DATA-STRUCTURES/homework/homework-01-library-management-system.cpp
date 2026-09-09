@@ -7,7 +7,7 @@ using namespace std;
     Design and implement a Library Management System using classes and access specifiers in C++. 
     The system should allow you to manage books in a library.
     Requirements:
-    1. Create a class named "Book" with the following attributes:
+    1. Create a class named "Book" with the following attributes: 
         Title (a string)
         Author (a string)
         Publication Year (an integer)
