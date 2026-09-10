@@ -95,9 +95,11 @@ int main() {
 
     // Guess: Is this an example of compile-time or run-time polymorphism?
     cout << "Sum (int): " << math.add(3, 4) << endl;
+    //compile time polimorfizmdir cunki run edilmemisden evvel kod hansi funksiyani cagiracagini bilir.
 
     // Guess: Is this an example of compile-time or run-time polymorphism?
     cout << "Sum (double): " << math.add(3.5, 4.5) << endl;
+    //compile time polimorfizmdir cunki run edilmemeisden evvel kod hansi funksiyani cagiracagini bilir.
 
     Complex c1, c2, result;
     c1.real = 1.0;
@@ -106,6 +108,8 @@ int main() {
     c2.imag = 1.5;
 
     // Guess: Is this an example of compile-time or run-time polymorphism?
+    //compile time polimorfizmdir , cunki operator overloadign var.Kod ilk novbede xeyali ededleri nece toplayacagini bilmir yuxaridaki klassdan oyrenib tetbiq edir.
+    //run zamani.
     result = c1 + c2;
     cout << "Sum: " << result.real << " + " << result.imag << "i" << endl;
 
@@ -114,10 +118,15 @@ int main() {
 
     // Guess: Is this an example of compile-time or run-time polymorphism?
     shape1->draw();  // Calls the draw() method of Circle
+    // run time polimorfizmdir cunki base sinifin pointerlerinden istifade olunub , inherit var virtual var(base sinifde funksiya).
 
     // Guess: Is this an example of compile-time or run-time polymorphism?
     shape2->draw();  // Calls the draw() method of Square
+    // eynile run time polimorfizmdir burda da inherit olunub chil classlar virtual funksiya var shape de bir de obyekt base classin komeyi ile yaranib.
 
     delete shape1;
     delete shape2;
 }
+//Qisa qeyd:Run time polimorfizm: Eger base class ve ondan inherit eden class ve ya klasslar varsa virtual funksiya varsa ve main de obyektler esas funksiyanin
+//pointeri seklinde yazilibsa bu boyuk ehtimal run time polimorfizmdir.Compile time polimorfizmde ise bunlara ehtiyac olmur.Eger Method overloading(1-ci numune)
+// operator overloading (2-ci numune) varsa onda 99% compile time polimorfizmdir.
