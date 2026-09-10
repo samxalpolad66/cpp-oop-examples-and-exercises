@@ -1,61 +1,70 @@
-#include <iostream>
-#include <string>
-
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
+class ProductManager{
+    public:
+    virtual void displayProductDetails(int ProductID){
+        cout << "Product ID: " << ProductID <<endl;
+    }
+    virtual ~ProductManager(){}
 
-/*
-    Polymorphism
+};
+class AbstractCart : public ProductManager{
+    protected:
+    vector<int>product;
+    public:
+    virtual ~AbstractCart(){}
+    void addToCart(int ProductID){
+        product.push_back(ProductID);
+        cout << "Product: " << ProductID << " added to cart." << endl;
+    };
+    void displayCart(){
+        if(product.empty()){
+            cout << "Cart is empty." <<endl;
+        }
+        for(int a : product){
+            cout << "Product ID: " << a << " ";
+        }
+    }
+    virtual void checkout() = 0;
+    void removeFromCart(int ProductID){
+        product.erase(remove(product.begin(), product.end(), 30), product.end());
+        cout << "Product: " << ProductID << "remove from cart." <<endl;
+    }
+};
+class OnlineStore : public AbstractCart{
+    public:
+    void displayProductDetails(int ProductID)override{
+        cout << "Product ID: " << ProductID << endl;
+    }
+    void checkout()override{
+        if(product.empty()){
+            cout << "Checkout failed...Cart is empty" <<endl;
+        }
+        else{
+        cout << "Payment is sucssesfully" <<endl;
+        }
+    }
 
-    15. Abstract Classes as Interfaces
-*/
+};
+class MobileApp : public AbstractCart{
+    public:
+    void displayProductDetails(int ProductID)override{
+        cout << "Product Id: " << ProductID << endl;
+    }
+    void checkout()override{
+        if(product.empty()){
+            cout << "Checkout failed...Cart is empty" <<endl;
+        }
+        else{
+        cout << "Payment is sucssesfully" <<endl;
+        }
+    }
 
-
-/*
-    Exercise: E-Commerce System Design
-
-    Instructions:
-
-    1. Define Product Management Interface:
-        Create an interface named ProductManager with a virtual function displayProductDetails that takes an int productId as a parameter.
-    2. Implement Abstract Cart Class:
-        Create an abstract class named AbstractCart that extends the ProductManager interface.
-        Provide common functionality for managing a shopping cart, including adding to the cart, 
-        removing from the cart, displaying the cart, and an abstract method checkout.
-    3. Implement Concrete Online Store Class:
-        Create a concrete class named OnlineStore that implements both the ProductManager interface and extends the AbstractCart abstract class.
-        Implement the displayProductDetails method for an online store-specific product details display.
-        Implement the checkout method for online store-specific checkout logic.
-    4. Implement Concrete Mobile App Class:
-        Create a concrete class named MobileApp that implements both the ProductManager interface and extends the AbstractCart abstract class.
-        Implement the displayProductDetails method for a mobile app-specific product details display.
-        Implement the checkout method for mobile app-specific checkout logic.
-
-    Tips:
-        Tip 1: Think about the functionalities that are common to both the online store and mobile app, and those that are specific to each.
-        Tip 2: Ensure that the abstract class provides a common structure for shopping cart management.
-        Tip 3: Implement the virtual functions in the derived classes with specific details related to the online store and mobile app.
-        Tip 4: Use virtual destructors in the interface and abstract class for proper cleanup.
-        Tip 5: Test your implementations by creating instances of the classes and 
-        performing operations like displaying product details, adding/removing items from the cart, and checking out.
-*/
-
-
-#include <vector>
-
-// TODO: Define ProductManager interface
-
-// TODO: Define AbstractCart abstract class
-
-// TODO: Implement OnlineStore class
-
-// TODO: Implement MobileApp class
-
-
-int main() {
-
-    // Step 4: Demonstrate the use of both the interface and abstract class
-
-    OnlineStore onlineStore;
+};
+int main(){
+     OnlineStore onlineStore;
     onlineStore.displayProductDetails(101);
     onlineStore.addToCart(101);
     onlineStore.addToCart(102);
@@ -68,5 +77,4 @@ int main() {
     mobileApp.removeFromCart(202);
     mobileApp.displayCart();
     mobileApp.checkout();
-
 }
